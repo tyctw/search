@@ -6,7 +6,10 @@ export const config = {
   HCAPTCHA_SITE_KEY: '10000000-ffff-ffff-ffff-000000000001', // Replace with your actual site key
   
   // Security settings
-  ENABLE_COPY_PROTECTION: true,
+  ENABLE_COPY_PROTECTION: false, // Changed to false to allow copy functionality
   ENABLE_RIGHT_CLICK_PROTECTION: true,
-  ENABLE_TEXT_SELECTION_PROTECTION: true
+  ENABLE_TEXT_SELECTION_PROTECTION: false, // Changed to false to allow text selection for copy
+  
+  // Theme settings
+  DARK_MODE_DEFAULT: false // Default theme mode (false = light, true = dark)
 };
