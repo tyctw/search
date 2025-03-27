@@ -11,6 +11,9 @@
   --box-shadow: 0 12px 24px rgba(0,0,0,0.12);
   --card-hover-transform: translateY(-8px);
   --transition-speed: 0.4s;
+  --border-radius: 20px;
+  --inner-border-radius: 16px;
+  --gradient-overlay: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
 }
 
 .dark-mode {
@@ -22,6 +25,7 @@
   --accent-color: #e6545e;
   --header-bg: #0f3460;
   --box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  --gradient-overlay: linear-gradient(135deg, rgba(40,40,60,0.1) 0%, rgba(20,20,40,0.05) 100%);
 }
 
 * {
@@ -39,6 +43,11 @@ body {
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(135deg, rgba(245,247,250,0.8) 0%, rgba(225,235,245,0.8) 100%);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.dark-mode body {
+  background-image: linear-gradient(135deg, rgba(26,26,46,0.8) 0%, rgba(15,15,30,0.8) 100%);
 }
 
 .header {
@@ -50,6 +59,11 @@ body {
   z-index: 1000;
   box-shadow: var(--box-shadow);
   background-image: linear-gradient(to right, #2c3e50, #4a5f72);
+  transition: background-image 0.5s ease;
+}
+
+.dark-mode .header {
+  background-image: linear-gradient(to right, #0f3460, #1a4980);
 }
 
 .header-content {
@@ -95,6 +109,9 @@ body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header-button:hover {
@@ -124,16 +141,30 @@ body {
   margin: 3.5rem auto;
   padding: 2.5rem;
   background-color: var(--card-background);
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color 0.5s ease;
   border: 1px solid rgba(230, 230, 250, 0.7);
   backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
-.container:hover {
-  transform: var(--card-hover-transform);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+.container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--gradient-overlay);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container > * {
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -165,6 +196,7 @@ input[type="text"] {
   font-size: 1rem;
   transition: all var(--transition-speed) ease;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  background-color: rgba(255,255,255,0.8);
 }
 
 input[type="text"]:focus {
@@ -172,6 +204,12 @@ input[type="text"]:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.25), inset 0 2px 4px rgba(0,0,0,0.05);
   transform: translateY(-2px);
+}
+
+.dark-mode input[type="text"] {
+  background-color: rgba(40,40,60,0.8);
+  border-color: #3a3a5a;
+  color: var(--text-color);
 }
 
 button {
@@ -187,6 +225,10 @@ button {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 button:hover {
@@ -214,10 +256,29 @@ button:hover:before {
   margin-top: 2.5rem;
   background-color: var(--card-background);
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: var(--inner-border-radius);
   box-shadow: var(--box-shadow);
-  transition: all var(--transition-speed) ease;
+  transition: all var(--transition-speed) ease, background-color 0.5s ease;
   border: 1px solid rgba(230, 230, 250, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+#result:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--gradient-overlay);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#result > * {
+  position: relative;
+  z-index: 1;
 }
 
 #result h2 {
@@ -247,6 +308,11 @@ button:hover:before {
   border-radius: 8px;
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
+  background-color: rgba(255,255,255,0.05);
+}
+
+.dark-mode #result p {
+  background-color: rgba(40,40,60,0.2);
 }
 
 #result p:hover {
@@ -283,6 +349,11 @@ button:hover:before {
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.dark-mode .report-code {
+  background-color: rgba(230, 84, 94, 0.15);
 }
 
 .copy-btn {
@@ -319,6 +390,7 @@ button:hover:before {
   gap: 1rem;
   margin-top: 1.5rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .utility-btn {
@@ -347,6 +419,20 @@ button:hover:before {
   width: 18px;
   height: 18px;
   fill: white;
+}
+
+.info-value {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: rgba(74, 137, 220, 0.1);
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .info-value {
+  background: rgba(90, 154, 238, 0.15);
 }
 
 .theme-toggle {
@@ -393,11 +479,48 @@ button:hover:before {
   z-index: 1001;
   text-align: center;
   font-weight: 500;
+  border-left: 4px solid var(--primary-color);
 }
 
 .toast.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
+}
+
+.h-captcha {
+  margin: 1.2rem 0;
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+}
+
+.h-captcha:hover {
+  transform: translateY(-3px);
+}
+
+.error-message {
+  color: var(--accent-color);
+  background-color: rgba(218, 68, 83, 0.1);
+  padding: 1.2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.05rem;
+  box-shadow: 0 3px 8px rgba(218, 68, 83, 0.15);
+  border-left: 4px solid var(--accent-color);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .validation-error {
@@ -429,24 +552,6 @@ footer {
   padding: 1.5rem;
   margin-top: auto;
   font-size: 0.9rem;
-}
-
-.h-captcha {
-  margin: 1.2rem 0;
-  display: flex;
-  justify-content: center;
-}
-
-.error-message {
-  color: var(--accent-color);
-  background-color: rgba(218, 68, 83, 0.1);
-  padding: 1.2rem;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1.05rem;
-  box-shadow: 0 3px 8px rgba(218, 68, 83, 0.15);
-  border-left: 4px solid var(--accent-color);
 }
 
 @media (max-width: 768px) {
@@ -498,6 +603,12 @@ footer {
 
   h1 {
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .utility-buttons {
+    flex-direction: column;
   }
 }
 
