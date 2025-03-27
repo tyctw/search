@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系統異常回報中心</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>TYCTW</h1>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div class="header-buttons" id="headerButtons">
+        <a href="https://tyctw.github.io/report_form.html" class="header-button">新增回報</a>
+        <a href="https://tyctw.github.io/Navigation/" class="header-button">更多資訊</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>TYCTW 系統異常回報查詢</h1>
+    
+    <form id="queryForm">
+      <label for="reportCode">回報代碼：</label>
+      <input type="text" id="reportCode" name="reportCode" required placeholder="請輸入您的回報代碼">
+      
+      <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+      
+      <button type="submit">查詢紀錄</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 TYCTW系統異常回報紀錄查詢 All rights reserved.
+  </footer>
+
+  <script src="config.js" type="module"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
