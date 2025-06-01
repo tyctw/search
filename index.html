@@ -1,95 +1,53 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>系統異常回報中心 | TYCTW</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系統異常回報中心</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-container">
-                <i class="fas fa-shield-alt"></i>
-                <h1>TYCTW</h1>
-            </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="header-buttons" id="headerButtons">
-                <a href="https://tyctw.github.io/report_form" class="header-button">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>新增回報</span>
-                </a>
-                <a href="https://tyctw.github.io/Navigation/" class="header-button">
-                    <i class="fas fa-info-circle"></i>
-                    <span>更多資訊</span>
-                </a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="page-header">
-            <i class="fas fa-search-location"></i>
-            <h1>系統異常回報查詢</h1>
-            <p class="subtitle">輸入回報代碼以查詢處理進度</p>
-        </div>
-
-        <form id="queryForm" class="search-form">
-            <div class="input-group">
-                <label for="reportCode">
-                    <i class="fas fa-hashtag"></i>
-                    回報代碼
-                </label>
-                <div class="input-wrapper">
-                    <input type="text" 
-                           id="reportCode" 
-                           name="reportCode" 
-                           required 
-                           placeholder="請輸入您的回報代碼"
-                           autocomplete="off">
-                    <div class="input-focus-border"></div>
-                </div>
-                <div class="validation-error" id="reportCodeError">
-                    <i class="fas fa-exclamation-circle"></i>
-                    請輸入有效的回報代碼
-                </div>
-            </div>
-
-            <div class="captcha-container">
-                <div class="h-captcha" data-sitekey="ceced506-fc3a-4214-976e-9514bf1eea48"></div>
-            </div>
-
-            <button type="submit" class="submit-button">
-                <i class="fas fa-search"></i>
-                <span>查詢紀錄</span>
-                <div class="button-loader"></div>
-            </button>
-        </form>
-
-        <div id="result" class="result-container"></div>
-    </main>
-
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>訊息已複製到剪貼簿</span>
+  <header class="header">
+    <div class="header-content">
+      <h1>TYCTW</h1>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div class="header-buttons" id="headerButtons">
+        <a href="https://tyctw.github.io/report_form" class="header-button">新增回報</a>
+        <a href="https://tyctw.github.io/Navigation/" class="header-button">更多資訊</a>
+      </div>
     </div>
+  </header>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 TYCTW系統異常回報紀錄查詢</p>
-            <p>All rights reserved.</p>
-        </div>
-    </footer>
+  <div class="container">
+    <h1>TYCTW 系統異常回報查詢</h1>
+    
+    <form id="queryForm">
+      <label for="reportCode">回報代碼：</label>
+      <input type="text" id="reportCode" name="reportCode" required placeholder="請輸入您的回報代碼">
+      <div class="validation-error" id="reportCodeError">請輸入有效的回報代碼</div>
+      
+      <div class="h-captcha" data-sitekey="ceced506-fc3a-4214-976e-9514bf1eea48"></div>
+      
+      <button type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        查詢紀錄
+      </button>
+    </form>
 
-    <script src="config.js" type="module"></script>
-    <script src="app.js" type="module"></script>
+    <div id="result"></div>
+  </div>
+
+  <div class="theme-toggle" id="themeToggle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg>
+  </div>
+
+  <div class="toast" id="toast">訊息已複製到剪貼簿</div>
+
+  <footer>
+    &copy; 2025 TYCTW系統異常回報紀錄查詢 All rights reserved.
+  </footer>
+
+  <script src="config.js" type="module"></script>
+  <script src="app.js" type="module"></script>
 </body>
 </html>
